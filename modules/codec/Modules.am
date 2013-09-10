@@ -35,6 +35,7 @@ SOURCES_telx = telx.c
 SOURCES_mash = mash.cpp
 SOURCES_x264 = x264.c
 SOURCES_x26410b = x264.c
+SOURCES_x265 = x265.c
 SOURCES_twolame = twolame.c
 SOURCES_dirac = dirac.c
 SOURCES_png = png.c

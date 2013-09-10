@@ -2839,6 +2839,24 @@ if test "${enable_x264}" != "no"; then
   fi
 fi
 
+dnl x265 encoder
+AC_ARG_ENABLE(x265,
+  AS_HELP_STRING([--enable-x265],[H265 / HEVC encoding support with libx265 (default enabled)]))
+AS_IF( [test "${enable_x265}" != "no"],[
+  AC_CHECK_HEADER([x265.h], [
+      AC_CHECK_LIB([encoder],[x265_encoder_open], [
+        VLC_ADD_PLUGIN([x265])
+        VLC_ADD_LIBS([x265], [-lencoder -lcommon -lstdc++ -lm -lpthread -lPrimitivesASM -lPrimitivesVec])
+      ], [
+        AC_MSG_ERROR([x265 library not found])
+      ], [-lcommon -lstdc++ -lm -lpthread -lPrimitivesASM -lPrimitivesVec])
+  ], [
+    AS_IF([test "${enable_x265}" = "yes"], [
+        AC_MSG_ERROR([x265.h not found])
+    ])
+  ])
+])
+
 dnl
 dnl Intel QuickSync (aka MediaSDK) H264/H262 encoder
 dnl
